@@ -10,17 +10,23 @@ namespace Cinema.ApplicationLogic.Models
         public int NumberOfSeats { get; private set; }
         public string Name { get; private set; }
         public bool IsActive { get; private set; }
-
-        public bool Disable()
+        
+        public static MovieTheater Create(SeatsMap seatsMap, string name, int numberOfSeats, bool isActive) 
         {
-            this.IsActive = false;
-            return this.IsActive;
+            return new MovieTheater
+            {
+                Id = Guid.NewGuid(),
+                SeatsMaps = seatsMap,
+                Name = name,
+                NumberOfSeats = numberOfSeats,
+                IsActive = isActive
+            };
         }
 
-        public bool Activate()
+        internal void Edit(string name, bool isActive)
         {
-            this.IsActive = true;
-            return this.IsActive;
+            this.Name = name;
+            this.IsActive = isActive;
         }
     }
 }

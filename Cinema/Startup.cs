@@ -12,6 +12,10 @@ using Cinema.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Cinema.DataAccess;
+using Cinema.ApplicationLogic.Services;
+using Cinema.ApplicationLogic.Abstractions;
+using Cinema.DataAccess.Repositories;
 
 namespace Cinema
 {
@@ -30,8 +34,18 @@ namespace Cinema
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDbContext<CinemaDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection1")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<MovieService>();
+            services.AddScoped<MovieTheaterService>();
+
+            services.AddScoped<IMovieRepository, EFMovieRepository>();
+            services.AddScoped<IMovieTheaterRepository, EFMovieTheaterRepository>();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

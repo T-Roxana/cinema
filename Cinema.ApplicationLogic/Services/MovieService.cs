@@ -25,16 +25,16 @@ namespace Cinema.ApplicationLogic.Services
             return movieRepository.GetAll();
         }
 
-        public Movie Add(string title)
+        public Movie Add(string title, string image)
         {
-            var movieToAdd = Movie.Create(title);
+            var movieToAdd = Movie.Create(title, image);
             return movieRepository.Add(movieToAdd);
         }
 
-        public Movie Update(Guid id, string title)
+        public Movie Update(Guid id, string title, string image)
         {
             var movieToUpdate = GetById(id);
-            movieToUpdate.Update(title);
+            movieToUpdate.Update(title, image);
             return movieRepository.Update(movieToUpdate);
         }
 

@@ -15,6 +15,24 @@ namespace Cinema.ApplicationLogic.Services
             this.movieTheaterRepository = movieTheaterRepository;
         }
 
+        public MovieTheater Add(string name,
+                                int numberOfRows,
+                                int numberOfColumns,
+                                bool isActive)
+        {
+            var seatsMap = SeatsMap.Create();
+            for (int i = 1; i <= numberOfRows; i++)
+            {
+                for (int j = 1; j <= numberOfColumns; j++)
+                {
+                    var seat = Seats.Create(i, j);
+                    seatsMap.AddSeat(seat);
+                }
+            }
+            var movieTheater = MovieTheater.Create(seatsMap, name, numberOfRows * numberOfColumns, isActive);
+            return movieTheaterRepository.Add(movieTheater);
+        }
+
         public MovieTheater GetById(Guid id)
         {
             return movieTheaterRepository.GetById(id);
@@ -25,18 +43,11 @@ namespace Cinema.ApplicationLogic.Services
             return movieTheaterRepository.GetAll();
         }
 
-        public MovieTheater Disable(Guid id)
+        public void Edit(Guid id, string name, bool isActive)
         {
-            var movieTheaterToDisable = GetById(id);
-            movieTheaterToDisable.Disable();
-            return movieTheaterRepository.Update(movieTheaterToDisable);
-        }
-
-        public MovieTheater Activate(Guid id)
-        {
-            var movieTheaterToDisable = GetById(id);
-            movieTheaterToDisable.Activate();
-            return movieTheaterRepository.Update(movieTheaterToDisable);
+            var movieTheaterDb = movieTheaterRepository.GetById(id);
+            movieTheaterDb.Edit(name, isActive);
+            movieTheaterRepository.Update(movieTheaterDb);
         }
     }
 }

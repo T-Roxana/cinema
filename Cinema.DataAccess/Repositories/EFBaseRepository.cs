@@ -28,7 +28,7 @@ namespace Cinema.DataAccess.Repositories
             return this.dbContext.Set<T>();
         }
 
-        public T GetById(Guid id)
+        public virtual T GetById(Guid id)
         {
             return this.dbContext.Set<T>().Where(entity => entity.Id == id).SingleOrDefault();
         }

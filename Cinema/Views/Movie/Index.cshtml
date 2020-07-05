@@ -1,0 +1,21 @@
+﻿@model Cinema.ViewModels.Movies.MoviesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a class="btn btn-dark" style="color: white; cursor: pointer;" asp-action="Create">Create Movie</a>
+    <div class="d-flex flex-wrap mt-3">
+        @foreach (var movie in Model.Movies)
+        {
+        <div style="border: .0625rem solid black; margin-right: 2rem; margin-bottom: 1.5rem;">
+            <img width="230" height="300" src="~/Images/@movie.Image" />
+            <div style="margin-top: 1rem; margin-left: 0.7rem; margin-bottom: 1rem;">
+                <div style=" font-size: 1.5rem;">@movie.Title</div>
+                <a class="btn btn-dark" style="color: white; cursor: pointer;">See program</a>
+                <a asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-dark" style="color: white; cursor: pointer;">Edit</a>
+            </div>
+        </div>
+        }
+    </div>
+

@@ -1,0 +1,17 @@
+﻿@model Cinema.ApplicationLogic.Models.MovieTheater
+
+@{
+    ViewData["Title"] = "SeeMap";
+}
+
+<h1 class="mb-4">@Model.Name - Seats Map</h1>
+
+<div>
+    <div>
+        @foreach (var seat in Model.SeatsMaps.Seats.OrderBy(seat => seat.Row))
+        {
+        <span class="mr-3 mb-3">@seat.Row @seat.Number</span>
+        }
+    </div>
+</div>
+
