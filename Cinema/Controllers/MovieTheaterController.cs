@@ -19,50 +19,38 @@ namespace Cinema.Controllers
 
         public IActionResult Index()
         {
-            return View(new MovieTheaterViewModel { MovieTheaters = movieTheaterService.GetAll() });
+            return View(new MovieTheatersViewModel { MovieTheaters = movieTheaterService.GetAll() });
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Add()
         {
-            return View(new CreateMovieTheaterViewModel { });
+            return View(new AddMovieTheaterViewModel { });
         }
 
         [HttpPost]
-        public IActionResult Create(CreateMovieTheaterViewModel viewModel)
+        public IActionResult Add(AddMovieTheaterViewModel viewModel)
         {
-            bool isActive = true;
-            if (viewModel.Status == "Inactive" || viewModel.Status == "inactive") isActive = false;
-            movieTheaterService.Add(viewModel.Name, viewModel.NumberOfRows, viewModel.NumberOfColumns, isActive);
+            movieTheaterService.Add(viewModel.Name, viewModel.NumberOfRows, viewModel.NumberOfColumns);
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult Edit(Guid id)
+        public IActionResult Details(Guid id)
         {
-            var movieTheaterDb = movieTheaterService.GetById(id);
-            string status = "Active";
-            if (!movieTheaterDb.IsActive) status = "Inactive";
-            return View(new EditMovieTheaterViewModel 
-            { 
-                Id = id,
-                Name = movieTheaterDb.Name,
-                Status = status
-            });
+            var movieTheater = movieTheaterService.GetById(id);
+            return View(new DetailsMovieTheaterViewModel { MovieTheater = movieTheater});
         }
 
-        [HttpPost]
-        public IActionResult Edit(EditMovieTheaterViewModel viewModel)
+        public IActionResult ChangeStatusActive(Guid id)
         {
-            var isActive = true;
-            if (viewModel.Status == "Inactive" || viewModel.Status == "inactive") isActive = false;
-            movieTheaterService.Edit(viewModel.Id, viewModel.Name, isActive);
-            return RedirectToAction("Index");
+            movieTheaterService.ChangeStatus(id, true);
+            return RedirectToAction("Details", new { id = id });
         }
 
-        public IActionResult SeeMap(Guid id)
+        public IActionResult ChangeStatusInactive(Guid id)
         {
-            return View(movieTheaterService.GetById(id));
+            movieTheaterService.ChangeStatus(id, false);
+            return RedirectToAction("Details", new { id = id });
         }
     }
 }

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-Cinema-1615D7E2-B032-4370-946C-89B74E2E8088</UserSecretsId>
+    <UserSecretsId>aspnet-Cinema-17310C48-93A6-4304-BB27-A9E2B5A17CA1</UserSecretsId>
   </PropertyGroup>
 
 
@@ -19,11 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Cinema.ApplicationLogic\Cinema.ApplicationLogic.csproj" />
     <ProjectReference Include="..\Cinema.DataAccess\Cinema.DataAccess.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>

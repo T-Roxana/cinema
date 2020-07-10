@@ -6,18 +6,17 @@ namespace Cinema.ApplicationLogic.Models
 {
     public class Seats : DataEntity
     {
-        public int Number{ get; private set; }
-        public int Row { get; private set; }
+        public string Row { get; private set; }
+        public string Column { get; private set; }
         public bool IsReserved { get; private set; }
 
-        public static Seats Create(int number, int row)
+        public static Seats Create(string row, string column)
         {
             return new Seats
             {
                 Id = Guid.NewGuid(),
-                Number = number,
                 Row = row,
-                IsReserved = false
+                Column = column
             };
         }
     }

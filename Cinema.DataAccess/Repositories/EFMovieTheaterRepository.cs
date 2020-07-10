@@ -16,9 +16,9 @@ namespace Cinema.DataAccess.Repositories
 
         public override MovieTheater GetById(Guid id)
         {
-            return dbContext.MovieTheaters.Where(mt => mt.Id == id)
-                                          .Include(mt => mt.SeatsMaps)
-                                          .ThenInclude(mt => mt.Seats)
+            return dbContext.MovieTheaters.Include(movieTheater => movieTheater.SeatsMaps)
+                                          .ThenInclude(movieTheater => movieTheater.Seats)
+                                          .Where(movieTheater => movieTheater.Id == id)
                                           .SingleOrDefault();
         }
     }

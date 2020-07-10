@@ -4,18 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<a class="btn btn-dark" style="color: white; cursor: pointer;" asp-action="Create">Create Movie</a>
-    <div class="d-flex flex-wrap mt-3">
-        @foreach (var movie in Model.Movies)
-        {
-        <div style="border: .0625rem solid black; margin-right: 2rem; margin-bottom: 1.5rem;">
-            <img width="230" height="300" src="~/Images/@movie.Image" />
-            <div style="margin-top: 1rem; margin-left: 0.7rem; margin-bottom: 1rem;">
-                <div style=" font-size: 1.5rem;">@movie.Title</div>
-                <a class="btn btn-dark" style="color: white; cursor: pointer;">See program</a>
-                <a asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-dark" style="color: white; cursor: pointer;">Edit</a>
+<a asp-action="Add" class="btn btn-secondary mb-3" style="cursor: pointer; color: white;">Add movie</a>
+
+<div class="card-columns">
+    @foreach (var movie in Model.Movies)
+    {
+        <div class="card" style="width: 18rem; border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mb-4" style="display: flex; justify-content: center; font-weight: 600;">@movie.Title</h5>
+                <div>
+                    Movie Star:
+                    <span style="font-weight: 600; margin-left: 20px;">@movie.Star</span>
+                </div>
+                <div class="mb-4">
+                    Release Date:
+                    <span style="font-weight: 600; margin-left: 5px;">@movie.ReleaseDate.ToShortDateString()</span>
+                </div>
+                <a asp-controller="Program" asp-action="SeeProgramForMovie" asp-route-movieId="@movie.Id" class="btn-see-program btn btn-secondary mb-3">See program</a>
             </div>
         </div>
-        }
-    </div>
-
+    }
+</div>

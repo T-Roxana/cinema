@@ -11,12 +11,12 @@ namespace Cinema.DataAccess
         {
         }
 
-        public DbSet<EndUser> EndUsers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MoviePlanning> MoviePlannings { get; set; }
         public DbSet<MovieTheater> MovieTheaters { get; set; }
-        public DbSet<Reservation> Reservations{ get; set; }
-        public DbSet<Seats> Seats{ get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Seats> Seats { get; set; }
         public DbSet<SeatsMap> SeatsMaps { get; set; }
     }
 }

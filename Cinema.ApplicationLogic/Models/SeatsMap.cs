@@ -7,6 +7,7 @@ namespace Cinema.ApplicationLogic.Models
     public class SeatsMap : DataEntity
     {
         public ICollection<Seats> Seats { get; private set; }
+
         public static SeatsMap Create()
         {
             return new SeatsMap
@@ -16,10 +17,11 @@ namespace Cinema.ApplicationLogic.Models
             };
         }
 
-        public void AddSeat(Seats seat)
+        public Seats AddSeat(Seats seat)
         {
-            if (Seats == null) Seats = new List<Seats>();
-            Seats.Add(seat);
+            if (this.Seats == null) Seats = new List<Seats>();
+            this.Seats.Add(seat);
+            return seat;
         }
     }
 }

@@ -7,15 +7,15 @@ namespace Cinema.ApplicationLogic.Models
     public class Reservation : DataEntity
     {
         public MoviePlanning MoviePlanning { get; private set; }
-        public EndUser EndUser { get; private set; }
+        public Customer Customer { get; private set; }
         public DateTime Date { get; private set; }
 
-        public static Reservation Create(EndUser endUser, MoviePlanning moviePlanning)
+        public static Reservation Create(Customer customer, MoviePlanning moviePlanning)
         {
             return new Reservation
             {
                 Id = Guid.NewGuid(),
-                EndUser = endUser,
+                Customer = customer,
                 MoviePlanning = moviePlanning,
                 Date = DateTime.UtcNow
             };

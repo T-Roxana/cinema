@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Cinema.ApplicationLogic.Abstractions
 {
-    public interface IMovieTheaterRepository : IBaseRepository<MovieTheater>
+    public interface ICustomerRepository: IBaseRepository<Customer>
     {
-
-    }   
+        Customer GetByUserId(string userId);
+    }
 }

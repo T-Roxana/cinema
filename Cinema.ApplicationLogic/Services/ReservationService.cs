@@ -26,10 +26,10 @@ namespace Cinema.ApplicationLogic.Services
             return reservationRepository.GetAll();
         }
 
-        public IEnumerable<Reservation> GetAllForEndUser(Guid endUserId)
+        public IEnumerable<Reservation> GetAllForEndUser(Guid customerId)
         {
             return reservationRepository.GetAll()
-                                        .Where(reservation => reservation.EndUser.Id == endUserId);
+                                        .Where(reservation => reservation.Customer.Id == customerId);
         }
 
         public void Cancel(Guid id)

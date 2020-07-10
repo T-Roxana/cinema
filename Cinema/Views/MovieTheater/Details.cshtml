@@ -1,0 +1,49 @@
+﻿@model Cinema.ViewModels.MovieTheaters.DetailsMovieTheaterViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Movie Theater: @Model.MovieTheater.Name</h2>
+<div class="mt-4" style="display: flex; font-size: 20px;">
+    <div class="mb-2 mr-2">Status:</div>
+    @if (Model.MovieTheater.IsActive)
+    {
+        <div style="color: green;">Active</div>
+    }
+    else
+    {
+        <div style="color: red;">Inactive</div>
+    }
+</div>
+<div style="color: white; cursor: pointer;">
+    <span><a asp-action="ChangeStatusActive" asp-route-id="@Model.MovieTheater.Id" class="btn btn-success">Change To Active</a></span>
+    <span><a asp-action="ChangeStatusInactive" asp-route-id="@Model.MovieTheater.Id" class="btn btn-danger">Change To Inactive</a></span>
+</div>
+
+<div class="mt-5 mb-5" style="font-size: 20px;">See program <a href="#">here.</a></div>
+
+<div>
+    <div class="mt-5 mb-3" style="font-size: 20px;">Select seats: </div>
+    @{ var i = 0; char row = 'A'; }
+    @while (i < Model.MovieTheater.SeatsMaps.Seats.Count)
+    {
+    <div style="display: flex;">
+        @{ var j = 0; }
+        @while (j < Model.MovieTheater.SeatsMaps.Seats.Count)
+        {
+            if (Model.MovieTheater.SeatsMaps.Seats.ElementAt(j).Row == row.ToString())
+            {
+                <span class="mt-2 mr-2 mb-2 seat">
+                    <span>@Model.MovieTheater.SeatsMaps.Seats.ElementAt(j).Row</span>
+                    <span>@Model.MovieTheater.SeatsMaps.Seats.ElementAt(j).Column</span>
+                </span>
+                i++;
+            }
+            j++;
+        }
+        @{ row++; }
+    </div>
+    }
+</div>
+

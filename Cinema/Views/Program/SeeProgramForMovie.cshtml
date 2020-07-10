@@ -1,0 +1,33 @@
+﻿@model Cinema.ViewModels.Programs.ProgramMovieViewModel
+
+@{
+    ViewData["Title"] = "SeeProgramForMovie";
+}
+
+<a asp-action="Create" asp-route-movieId="@Model.Movie.Id" class="btn btn-secondary">Create program</a>
+
+<div style="display: flex;" class="mt-3 mb-3">
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="0">@DateTime.Now.DayOfWeek</a>
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="1">@DateTime.Now.AddDays(1).DayOfWeek</a>
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="2">@DateTime.Now.AddDays(2).DayOfWeek</a>
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="3">@DateTime.Now.AddDays(3).DayOfWeek</a>
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="4">@DateTime.Now.AddDays(4).DayOfWeek</a>
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="5">@DateTime.Now.AddDays(5).DayOfWeek</a>
+    <a class="mr-2 btn btn-secondary" asp-action="SeeProgramDayForMovie" asp-route-movieId="@Model.Movie.Id" asp-route-dayId="6">@DateTime.Now.AddDays(6).DayOfWeek</a>
+</div>
+
+@if (Model.MoviePlannings != null)
+{
+@foreach (var item in Model.MoviePlannings)
+{
+    <div class="card" style="width: 30rem; border-radius: 10px;">
+        <div class="card-body">
+            <span class="mr-5">@Model.Movie.Title</span>
+            <span class="ml-4">@item.Start.ToString("dd/MM hh:mm")</span>
+            <span>-</span>
+            <span>@item.End.ToString("dd/MM hh:mm")</span>
+        </div>
+    </div>
+}
+}
+
